@@ -1,8 +1,10 @@
-from urllib import urlopen,unquote
+from urllib import urlopen,unquote,quote
 import re,os.path
 from flask import Flask, request, Response
 from jinja2 import Template, Environment, FileSystemLoader
 import json
+from werkzeug.contrib.fixers import ProxyFix
+
 
 
 class api_response(Response):
@@ -18,7 +20,7 @@ APP_DIR = os.path.dirname(__file__)
 TEMPLATES_PATH = os.path.join(APP_DIR,'templates')
 app = Flask(__name__)
 env = Environment(loader=FileSystemLoader(TEMPLATES_PATH))
-STATIC_URL="/static/"
+STATIC_URL="/static1/"
 
 def indexof(word,key):
     try:
@@ -29,15 +31,15 @@ def indexof(word,key):
 
 def quality(link):
     if(indexof(link,"small")>=0):
-        return "small(240px)"
+        return "(240p)"
     elif(indexof(link,"medium")>=0):
-        return "medium(360px)"
+        return "(360p)"
     elif(indexof(link,"large")>=0):
-        return "large(480px)"
+        return "(480p)"
     elif(indexof(link,"hd720")>=0):
-        return "HD(720px)"
+        return "HD(720p)"
     elif(indexof(link,"hd1080")>=0):
-        return "HD(1080px)"
+        return "HD(1080p)"
     else:
         return "unknown quality"
 def format(link):
@@ -52,7 +54,7 @@ def format(link):
     else:
         return "unknown format"
 
-@app.route('/YTDownloader',methods=['POST'])
+@app.route('/ytdownloader',methods=['POST'])
 def getlinks():
 	url = request.args['url']
 	webpage=urlopen(url).read()
@@ -90,6 +92,7 @@ def getlinks():
 				x=0
 	flinks={'title': title}
 	for i in links:
+		i=i+'&title='+quote(title)
 		formats=format(i)
 		qualit=quality(i)
 		if('name' in flinks):
@@ -105,11 +108,13 @@ def getlinks():
 	return response
 
 
-@app.route('/')
+@app.route('/ytdownloader')
 def index():
 	ctx = {'STATIC': STATIC_URL}
 	template = env.get_template('index.html')
 	rendered = template.render(ctx)	
 	return rendered
 
-app.run(port=8080,debug=True)
+app.wsgi_app = ProxyFix(app.wsgi_app)
+if __name__ == '__main__':
+	app.run(port=8080,debug=True)

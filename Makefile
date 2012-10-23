@@ -3,4 +3,5 @@ setup:
 	./venv/bin/pip install -r requirements.txt
 
 run:
-	./venv/bin/python main.py
+	export PYTHONPATH='/home/namit/repo/ytdownloader/venv/lib/python2.7/site-packages'
+	gunicorn main:app
