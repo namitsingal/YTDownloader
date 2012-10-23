@@ -11,6 +11,7 @@ class api_response(Response):
         super(api_response, self).__init__(*args, **kwargs)
         self.data = json.dumps(response_obj)
         self.mimetype = 'application/json'
+        
 
 
 APP_DIR = os.path.dirname(__file__)
@@ -51,7 +52,7 @@ def format(link):
     else:
         return "unknown format"
 
-@app.route('/ytdownloader')
+@app.route('/YTDownloader',methods=['POST'])
 def getlinks():
 	url = request.args['url']
 	webpage=urlopen(url).read()
@@ -77,7 +78,7 @@ def getlinks():
 			n1=q1.index("url=");
 			try:
 				n2=q1.index("codecs")
-				n3=q1.index("fallbafrom jinja2 import Template, Environment, FileSystemLoader")
+				n3=q1.index("fallba")
 				links.append(q1[n1+4:n2-1]+"!"+q1[n3:].replace("sig","signature"));
 			except(ValueError):
 				links.append(q1[n1+4:].replace("sig","signature"));
@@ -94,12 +95,21 @@ def getlinks():
 		if('name' in flinks):
 			flinks['name'].append(formats+" "+qualit)
 			flinks['link'].append(i)
+			flinks['format'].append(formats)
 			#print formats+" "+qualit 
 		else:
 			flinks['name']=[formats+" "+qualit]
 			flinks['link']=[i]
-	response={'root':flinks}
-	return api_response(response,'json')
+			flinks['format']=[formats]
+	response=api_response(flinks,'json')
+	return response
 
+
+@app.route('/')
+def index():
+	ctx = {'STATIC': STATIC_URL}
+	template = env.get_template('index.html')
+	rendered = template.render(ctx)	
+	return rendered
 
 app.run(port=8080,debug=True)

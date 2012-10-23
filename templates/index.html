@@ -1,0 +1,33 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>YTDownloader</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="stylesheet" href="{{ STATIC }}css/main.css">
+  <link href='http://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister' rel='stylesheet' type='text/css'>
+  <script src="{{ STATIC }}js/jquery-1.8.2.min.js"></script>
+  <script src="{{ STATIC }}js/main.js"></script>
+
+</head>
+<body>
+  <div id="logo"><span class="logo normal">YT</span><span class="logo" id="o">D</span><span class="logo normal">ownloader</span></div>
+  <div id="urls">Enter Youtube URL</div>
+  <input type="text" name="link" id="link" />
+  <input type="hidden" value="{{ STATIC }}" id="static-url"/>
+  <div id="overlay" class="dialogue"></div>
+    <div id="login-box" class="dialogue"></div>
+      <p><img class="spinner" id="login-spinner" src="{{ STATIC }}img/spinner.gif"/>
+                  
+</p>
+<a href="#" id="btn-homepage-login" class="homepage-button" >Download</a>
+      <div id="links"></div>
+      <div id="links1"></div>
+</body>
+</html>
