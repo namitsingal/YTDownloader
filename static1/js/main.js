@@ -36,7 +36,11 @@ $(document).ready(function() {
 				}
 					$("#btn-homepage-login").show();
 				*/
-			}
+			}.fail(function() { 
+			 $('#login-spinner').css({display: 'none'});
+			 $("#btn-homepage-login").show();
+			 $('#links1').append('Link Invalid/Service Temporarily Down');
+		});
 		})
 	});
 });
