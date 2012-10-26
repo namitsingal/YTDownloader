@@ -6,6 +6,7 @@ function jso(sss)
 		$('#login-spinner').css({display: 'none'});
         $("#btn-homepage-login").show();
 	 	$('#links1').html('');
+	 	$('#links').html('');
 		$('#links1').append('Link Invalid/Service Temporarily Down, try again');
 		return;
 	}	
@@ -23,6 +24,7 @@ function jso(sss)
 $(document).ready(function() {
 	$('#btn-homepage-login').click(function() {
 			$('#links1').html('');
+			$('#links').html('');
 			$('#login-spinner').css({display: 'block'});
 			var link = $('#link').val();
 			$("#btn-homepage-login").hide();
