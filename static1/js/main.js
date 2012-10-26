@@ -1,6 +1,15 @@
 	
 function jso(sss)
-{
+{	
+	if(!sss.name)
+	{
+		$('#login-spinner').css({display: 'none'});
+        $("#btn-homepage-login").show();
+	 	$('#links1').html('');
+		$('#links1').append('Link Invalid/Service Temporarily Down, try again');
+		return;
+	}	
+		
 	$('#links1').html('');
 	$('#login-spinner').css({display: 'none'});
 	$('#links').append('<div id="ll" class="first">'+sss.title+'</div>' )
@@ -13,8 +22,8 @@ function jso(sss)
 }
 $(document).ready(function() {
 	$('#btn-homepage-login').click(function() {
+			$('#links1').html('');
 			$('#login-spinner').css({display: 'block'});
-			$('#links').html('');
 			var link = $('#link').val();
 			$("#btn-homepage-login").hide();
 			var uri='http://ytdownloader-namitsingal.rhcloud.com/ytdownloader?url='.concat(link)
@@ -36,11 +45,7 @@ $(document).ready(function() {
 				}
 					$("#btn-homepage-login").show();
 				*/
-			}.fail(function() { 
-			 $('#login-spinner').css({display: 'none'});
-			 $("#btn-homepage-login").show();
-			 $('#links1').append('Link Invalid/Service Temporarily Down');
-		});
-		})
+			}
+			})
 	});
 });
