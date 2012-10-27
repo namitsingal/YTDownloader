@@ -16,7 +16,7 @@ function jso(sss)
 	$('#links').append('<div id="ll" class="first">'+sss.title+'</div>' )
 	for (i in sss.name)
 		{	k=parseInt(i)+1;
-			$('#links').append('<div id="ll">' + '<a href="http://ytdownloader-namitsingal.rhcloud.com/download?url='+ (sss).link[i] +'&format='+sss.format[i]+'">'+'>> Download '+sss.name[i] + ' << </a></div>');
+			$('#links').append('<div id="ll">' + '<a href="http://ytdownloader-namitsingal.rhcloud.com/download/'+sss.title +'.'+sss.format[i]+'?url='+ (sss).link[i] +'&format='+sss.format[i]+'">'+'>> Download '+sss.name[i] + ' << </a></div>');
 			
 		}
 	$("#btn-homepage-login").show();
