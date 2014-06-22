@@ -54,6 +54,18 @@ def format(link):
     else:
         return "unknown format"
 
+
+@app.route('/')
+def rethome():
+	template = env.get_template('home.html')
+        rendered = template.render()
+        return rendered
+
+	#return Response("web page down for maintenance");
+
+
+
+
 @app.route('/ytdownloader',methods=['POST'])
 def getlinks():
 	url = request.args['url']
